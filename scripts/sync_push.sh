@@ -27,10 +27,10 @@ if [ -z "$ART" ]; then
 fi
 [ -f "$ART" ] || { echo "未找到仓库文章文件: $ART" >&2; exit 1; }
 
-# 3) 提交仓库（黄金来源）并推送
+# 3) 提交仓库（黄金来源）并推送到 pages 分支
 git -C "$ROOT" add "$ART"
 git -C "$ROOT" commit -m "content: $TITLE (from $ISSUE_ID)" || echo "无新变更，跳过提交"
-git -C "$ROOT" push origin main 2>/dev/null || echo "推送失败（可稍后手动 push）"
+git -C "$ROOT" push origin pages 2>/dev/null || echo "推送失败（可稍后手动 push pages）"
 
 # 4) 创建/更新 GitHub Issue（编号从返回的 URL 解析，兼容无 --json 的 gh）
 EXISTING=$(multica issue metadata list "$ISSUE_ID" --output json 2>/dev/null | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('github_issue',''))" 2>/dev/null)
