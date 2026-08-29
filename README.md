@@ -1,43 +1,30 @@
 # 开源导览 · 文章仓库（private）
 
-公众号「开源导览」内容资产的版本化管理仓库。
+公众号「开源导览」内容资产的版本化管理仓库，同时是一个可安装的文章管理技能。
 
-## 定位与同步原则
+## 分支模型
 
-- **黄金来源（Golden Source）**：本仓库中的 `articles/**` 文件是文章内容的**最终可靠来源**，所有修订通过 git 提交留痕。
-- **选题与跟踪来源**：Multica Issue（BPS-*）与 GitHub Issue 均为**选题来源与跟踪视图**，可在任一处创建跟踪任务，通过 `github_issue` 编号互相关联。
-- 发布流程：仓库定稿 → 推送 GitHub（Issue 跟踪）→ 审核 → 微信草稿箱发布。
+- **`main`**：脚本 / 技能存储跟踪分支。含 `SKILL.md`（本技能）、`scripts/` 同步脚本。**不含文章内容**。
+- **`pages`**：文章内容跟踪分支。定稿文章与配图在此提交；对该分支开启 GitHub Pages，域名 `open-source.cofire.cn`，发布走此分支。
 
-## 目录结构
+## 黄金来源与跟踪
+
+- 文章内容的**最终可靠来源**是 `pages` 分支的 `articles/**` 文件；配图必须一并入库。
+- Multica Issue 与 GitHub Issue 为选题/跟踪视图，通过 `github_issue` 编号关联。
+- 详见仓库根 `SKILL.md`。
+
+## 目录结构（pages 分支）
 
 ```
-articles/
-  <版块>/
-    <年份>/
-      <月份>/
-        <NN>_<标题>.md     # NN 与 Multica 子任务编号对齐
-scripts/
-  sync_push.sh             # Multica/GitHub Issue → 仓库文件 + GitHub Issue
-  sync_pull.sh             # GitHub Issue 变更 → 回写 Multica metadata
-```
-
-## 文章文件规范
-
-每篇 md 顶部含 YAML frontmatter：
-
-```yaml
-title: "标题"
-author: 瀚创社
-section: 心路历程
-column: "首发第 N 期"
-topic: "主题"
-suggested_publish: "周一 21:00"
-source_issue: BPS-6
+articles/<版块>/<年份>/<月份>/<NN>_<标题>.md
+articles/<版块>/<年份>/<月份>/<NN>_<标题>/images/   # 配图
+CNAME            # open-source.cofire.cn
+scripts/         # 同步脚本
 ```
 
 ## 同步脚本
 
-- `scripts/sync_push.sh <multica_issue_id> [github_issue_number]`：将文章写入仓库并提交，并在 `dolfly/open-source` 创建/更新对应 GitHub Issue，编号回写 Multica issue 的 `github_issue` metadata。
-- `scripts/sync_pull.sh`：读取 `dolfly/open-source` 的 Issue 状态变更（如关闭），回写 Multica issue 状态。
+- `scripts/sync_push.sh <multica_issue_id> [文章md]`：写 `pages` 分支 + 建/更 GitHub Issue（正文=标题+原始文件链接）+ 回写 metadata + 状态同步。
+- `scripts/sync_status.sh`：按 `github_issue` 双向对齐 Multica / GitHub 状态。
 
-> 同步依赖 `gh` 已登录且对 `dolfly/open-source` 有写权限。
+> GitHub Pages：`pages` 分支、`/` 路径，自定义域 `open-source.cofire.cn`。
