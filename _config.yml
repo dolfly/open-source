@@ -1,0 +1,13 @@
+title: 开源导览 · 心路历程
+description: 开源导览公众号「心路历程」专栏文章资产（黄金来源 = pages 分支）
+markdown: kramdown
+encoding: utf-8
+exclude:
+  - scripts
+  - README.md
+  - .gitignore
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
