@@ -8,11 +8,11 @@ title: 开源导览 · 心路历程
 
 ## 文章列表
 
-{% assign posts = site.pages | where_exp: "p", "p.url contains '/articles/'" %}
-{% assign posts = posts | where_exp: "p", "p.url contains '_meta' | not" %}
-{% assign posts = posts | sort: "url" %}
+{% assign posts = site.pages | where_exp: "p", "p.url contains '/articles/'" | sort: "url" %}
 {% for p in posts %}
+{% unless p.url contains '_meta' %}
 - [{{ p.title }}]({{ p.url | relative_url }})
+{% endunless %}
 {% endfor %}
 
 ---
