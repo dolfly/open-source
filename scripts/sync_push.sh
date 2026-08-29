@@ -46,4 +46,13 @@ fi
 
 # 5) 回写 metadata
 multica issue metadata set "$ISSUE_ID" --key github_issue --value "$GH_ISSUE"
+
+# 6) 状态同步（Multica -> GitHub）
+MSTATUS=$(multica issue get "$ISSUE_ID" --output json | python3 -c "import json,sys;print(json.load(sys.stdin)['status'])")
+if [ "$MSTATUS" = "done" ] || [ "$MSTATUS" = "cancelled" ]; then
+  gh issue close "$GH_ISSUE" --repo "$REPO" >/dev/null 2>&1 && echo "closed github #$GH_ISSUE"
+else
+  gh issue reopen "$GH_ISSUE" --repo "$REPO" >/dev/null 2>&1 || true
+fi
+
 echo "done: multica $ISSUE_ID <-> github #$GH_ISSUE"
