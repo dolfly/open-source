@@ -1,6 +1,6 @@
 ---
 name: open-source-article-manager
-description: 管理「开源导览」公众号文章资产——把定稿文章提交到 dolfly/open-source 的 pages 分支（黄金来源），通过 GitHub Pages（open-source.cofire.cn）发布，并与 Multica Issue 双向跟踪。当用户需要「整理文章到 github」「把文章发布到开源导览仓库」「同步文章与 Multica/GitHub Issue」「维护 pages 分支与 GitHub Pages」时使用。
+description: 管理「开源导览」公众号文章资产——把定稿文章提交到 dolfly/open-source 的 pages 分支（黄金来源），通过 GitHub Pages（open-source.p.diele.me）发布，并与 Multica Issue 双向跟踪。当用户需要「整理文章到 github」「把文章发布到开源导览仓库」「同步文章与 Multica/GitHub Issue」「维护 pages 分支与 GitHub Pages」时使用。
 ---
 
 # 开源导览 · 文章管理技能
@@ -13,7 +13,7 @@ description: 管理「开源导览」公众号文章资产——把定稿文章�
 | 分支 | 用途 |
 |------|------|
 | `main` | **脚本 / 技能** 存储跟踪分支。本 `SKILL.md`、`scripts/` 在此维护。不含文章内容。 |
-| `pages` | **文章内容** 跟踪分支。定稿文章、配图在此提交；仓库对该分支开启 GitHub Pages，域名 `open-source.cofire.cn`。发布走此分支。 |
+| `pages` | **文章内容** 跟踪分支。定稿文章、配图在此提交；仓库对该分支开启 GitHub Pages，域名 `open-source.p.diele.me`。发布走此分支。 |
 
 > 黄金来源原则：文章内容的**最终可靠来源**是 `pages` 分支的 `articles/**` 文件；
 > Multica Issue 与 GitHub Issue 均为选题/跟踪视图，可在任一处创建，通过 `github_issue` 编号关联。
@@ -27,7 +27,7 @@ articles/
       <NN>_<标题>.md
       <NN>_<标题>/images/   # 该篇配图
 images/              # 全局配图备用目录
-CNAME                # open-source.cofire.cn
+CNAME                # open-source.p.diele.me
 scripts/             # 同步脚本（同 main）
 ```
 
@@ -50,7 +50,7 @@ source_issue: BPS-6
 ## 发布流程
 
 1. 在 `pages` 分支写稿：`articles/<版块>/<年>/<月>/<NN>_<标题>.md`，配图提交到同目录 `images/`（**配图必须入库**）。
-2. 提交并 push `pages` 分支 → GitHub Pages 自动更新 `open-source.cofire.cn`。
+2. 提交并 push `pages` 分支 → GitHub Pages 自动更新 `open-source.p.diele.me`。
 3. 选题/跟踪：每篇在 Multica 建 issue，编号回写 `github_issue` metadata；如需 GitHub Issue 跟踪，正文仅放「标题 + 原始文件链接」（见下）。
 4. 审核通过后发布到公众号草稿箱（由「baoyu-post-to-wechat」等技能执行）。
 
