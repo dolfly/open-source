@@ -1,5 +1,5 @@
 ---
-title: "我陪4岁的儿子搭积木用上了CI-CD的思维.md
+title: "我陪4岁的儿子搭积木用上了CI-CD的思维"
 author: 瀚创社
 section: 心路历程
 column: "心路历程"
